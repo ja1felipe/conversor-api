@@ -1,16 +1,15 @@
 module.exports = {
-    presets: [
-        [
-            '@babel/preset-env',
-            {
-                targets: {
-                    node: 'current'
-                }
-            }
-        ],
-        '@babel/preset-typescript'
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current'
+        }
+      }
     ],
-    ignore: [
-        '**.*.spec.ts'
-    ]
-}
+    '@babel/preset-typescript'
+  ],
+  plugins: [['@babel/plugin-proposal-decorators', { legacy: true }]],
+  ignore: ['**.*.spec.ts']
+};
