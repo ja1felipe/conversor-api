@@ -1,0 +1,13 @@
+{
+  "App": {
+    "port": 3333,
+    "database": {
+      "mongoURI": "mongodb://localhost:27017/conversor"
+    },
+    "resources": {
+      "exchangeRates": {
+        "apiURI": "https://api.exchangeratesapi.io"
+      }
+    }
+  }
+}

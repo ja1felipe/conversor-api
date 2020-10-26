@@ -1,0 +1,13 @@
+{
+  "App": {
+    "port": "APP_PORT",
+    "database": {
+      "mongoURI": "MONGO_URI"
+    },
+    "resources": {
+      "exchangeRates": {
+        "apiURI": "EXCHANGE_RATES_API_URL"
+      }
+    }
+  }
+}
