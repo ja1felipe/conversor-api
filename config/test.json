@@ -4,6 +4,9 @@
       "exchangeRates": {
         "apiURI": "https://api.exchangeratesapi.io"
       }
+    },
+    "logger": {
+      "enabled": false
     }
   }
 }
