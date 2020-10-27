@@ -1,5 +1,6 @@
 import { InternalError } from '../utils/errors/internal-error';
 import { ExchangeRates } from '../clients/exchangeRates';
+import logger from '../logger';
 
 interface ConvertedInfos {
   convert_from_type: string;
@@ -23,6 +24,7 @@ export class Converter {
     convert_to_type: string
   ): Promise<ConvertedInfos> {
     try {
+      logger.info(`Fetching rates to currency: ${convert_from_type}`);
       const response = await this.exchangeRates.fetchRates(convert_from_type);
       const conversion_rate = response.rates[convert_to_type];
       const convert_to_value = Number(
@@ -36,6 +38,7 @@ export class Converter {
         conversion_rate
       };
     } catch (error) {
+      logger.error(error);
       throw new ConverterProcessingError(error.message);
     }
   }

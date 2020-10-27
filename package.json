@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "dev": "ts-node-dev --respawn --transpile-only --no-notify src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --no-notify src/index.ts | pino-pretty -c",
     "start": "node dist/index.js",
     "test": "jest",
     "test:functional": "jest --projects ./test --runInBand"
@@ -14,16 +14,18 @@
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/node": "^7.10.5",
-    "@babel/plugin-proposal-decorators": "^7.12.1",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
     "@types/axios": "^0.14.0",
     "@types/config": "^0.0.36",
     "@types/express": "^4.17.8",
+    "@types/express-pino-logger": "^4.0.2",
     "@types/jest": "^26.0.14",
     "@types/mongoose": "^5.7.36",
     "@types/nock": "^11.1.0",
+    "@types/pino": "^6.3.3",
     "@types/supertest": "^2.0.10",
+    "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.2.0",
@@ -31,6 +33,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.4.2",
     "nock": "^13.0.4",
+    "pino-pretty": "^4.3.0",
     "prettier": "^2.1.2",
     "supertest": "^5.0.0",
     "ts-jest": "^26.4.0",
@@ -44,6 +47,9 @@
     "body-parser": "^1.19.0",
     "config": "^3.3.2",
     "express": "^4.17.1",
-    "mongoose": "^5.10.10"
+    "express-pino-logger": "^5.0.0",
+    "mongoose": "^5.10.10",
+    "pino": "^6.7.0",
+    "swagger-ui-express": "^4.1.4"
   }
 }

@@ -1,0 +1,180 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.3.0",
+    "title": "Converter",
+    "description": "Converter API",
+    "termsOfService": "http://api_url/terms/",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://conversor-api1.herokuapp.com/",
+      "description": "Production Server"
+    },
+    {
+      "url": "http://localhost:3000/",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/converter": {
+      "post": {
+        "description": "Create a new conversion",
+        "operationId": "createConversion",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Conversion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The conversion has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversionCreatedResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get the conversion of user with id pass",
+        "operationId": "getUserProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/user"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The conversions made by that user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserConversionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "user": {
+        "type": "number",
+        "example": 1
+      },
+      "convert_from_type": {
+        "type": "string",
+        "example": "BRL"
+      },
+      "convert_from_value": {
+        "type": "number",
+        "example": 10
+      },
+      "convert_to_type": {
+        "type": "string",
+        "example": "USD"
+      },
+      "convert_to_value": {
+        "type": "number",
+        "example": 56.38
+      },
+      "conversion_rate": {
+        "type": "number",
+        "example": 5.6381845842
+      },
+      "created_at": {
+        "type": "string",
+        "example": "2020-10-27T18:55:47.654Z"
+      },
+      "Conversion": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/user"
+          },
+          "convert_from_type": {
+            "$ref": "#/components/schemas/convert_from_type"
+          },
+          "convert_from_value": {
+            "$ref": "#/components/schemas/convert_from_value"
+          },
+          "convert_to_type": {
+            "$ref": "#/components/schemas/convert_to_type"
+          }
+        }
+      },
+      "ConversionCreatedResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "convert_from_type": {
+                "$ref": "#/components/schemas/convert_from_type"
+              },
+              "convert_from_value": {
+                "$ref": "#/components/schemas/convert_from_value"
+              },
+              "convert_to_type": {
+                "$ref": "#/components/schemas/convert_to_type"
+              },
+              "convert_to_value": {
+                "$ref": "#/components/schemas/convert_to_value"
+              },
+              "conversion_rate": {
+                "$ref": "#/components/schemas/conversion_rate"
+              },
+              "created_at": {
+                "$ref": "#/components/schemas/created_at"
+              }
+            }
+          }
+        }
+      },
+      "UserConversionsResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "convert_from_type": {
+              "$ref": "#/components/schemas/convert_from_type"
+            },
+            "convert_from_value": {
+              "$ref": "#/components/schemas/convert_from_value"
+            },
+            "convert_to_type": {
+              "$ref": "#/components/schemas/convert_to_type"
+            },
+            "conversion_rate": {
+              "$ref": "#/components/schemas/conversion_rate"
+            },
+            "created_at": {
+              "$ref": "#/components/schemas/created_at"
+            }
+          }
+        }
+      }
+    }
+  }
+}

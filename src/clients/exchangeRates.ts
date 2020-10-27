@@ -1,6 +1,7 @@
 import { InternalError } from '../utils/errors/internal-error';
 import config, { IConfig } from 'config';
 import axios from 'axios';
+import logger from '../logger';
 export interface ExchangeRatesResponseRates {
   [key: string]: number;
   CAD: number;
@@ -69,6 +70,7 @@ export class ExchangeRates {
       );
       return response.data;
     } catch (error) {
+      logger.error(error);
       if (error.response && error.response.status) {
         throw new ExchangeRatesError(
           `Error: ${error.message.data} Code: ${error.response.status}`

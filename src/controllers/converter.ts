@@ -1,6 +1,7 @@
 import { Controller, Post, Get } from '@overnightjs/core';
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import logger from '../logger';
 import { Conversion } from '../models/conversion';
 import { Converter } from '../services/converter';
 
@@ -38,6 +39,7 @@ export class ConverterController {
       if (error instanceof mongoose.Error.ValidationError) {
         res.status(422).send({ error: error.message });
       } else {
+        logger.error(error);
         res.status(500).send({ error: 'Internal Server Error' });
       }
     }
@@ -47,9 +49,11 @@ export class ConverterController {
   public async getById(req: Request, res: Response): Promise<void> {
     try {
       const user_id = req.params.id;
+      logger.info(`Getting all conversions of user: ${user_id}`);
       const conversions = await Conversion.find({ user: Number(user_id) });
       res.status(200).send(conversions);
     } catch (error) {
+      logger.error(error);
       res.status(500).send({ error: 'Internal Server Error' });
     }
   }
